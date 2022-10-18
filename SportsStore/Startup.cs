@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -37,10 +38,16 @@ namespace SportsStore {
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseEndpoints(endpoints => {
-                endpoints.MapControllerRoute("pagination",
-                    "Products/Page{productPage}",
-                    new { Controller = "Home", action = "Index" });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("catpage", "{category}/Page{productPage:int}",
+                    new {Controller = "Home", action = "Index"});
+                endpoints.MapControllerRoute("page", "Page{productPage:int}",
+                    new {Controller = "Home", action = "Index",productPage = 1});
+                endpoints.MapControllerRoute("category", "{category}",
+                    new {Controller = "Home", action = "Index",productPage = 1});
+                endpoints.MapControllerRoute("paginations", "Products/Page{productPage}",
+                        new {Controller = "Home", action = "Index",productPage = 1});
                 endpoints.MapDefaultControllerRoute();
             });
 

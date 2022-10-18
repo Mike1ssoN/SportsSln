@@ -18,4 +18,8 @@
     <ProjectReference Include="..\SportsStore\SportsStore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Pages\Components\NavigationMenu\Default.cshtml" />
+  </ItemGroup>
+
 </Project>
